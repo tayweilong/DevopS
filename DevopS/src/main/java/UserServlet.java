@@ -88,13 +88,17 @@ public class UserServlet extends HttpServlet {
 		String action = request.getServletPath();
 		try {
 			switch (action) {
-				case "/insert":
+				case "/UserServlet/delete":
+					deleteUser(request, response);
 					break;
-				case "/delete":
+				case "/UserServlet/edit":
+					showEditForm(request, response);
 					break;
-				case "/edit":
+				case "/UserServlet/update":
+					updateUser(request, response);
 					break;
-				case "/update":
+				case "/UserServlet/dashboard":
+					listUsers(request,response);
 					break;
 				default:
 					listUsers(request, response);
@@ -103,6 +107,21 @@ public class UserServlet extends HttpServlet {
 		} catch (SQLException ex) {
 			throw new ServletException(ex);	
 		}
+	}
+
+	private void updateUser(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void deleteUser(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	/**
