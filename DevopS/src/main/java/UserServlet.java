@@ -100,9 +100,7 @@ public class UserServlet extends HttpServlet {
 				case "/UserServlet/dashboard":
 					listUsers(request,response);
 					break;
-				default:
-					listUsers(request, response);
-					break;
+
 		}
 		} catch (SQLException ex) {
 			throw new ServletException(ex);	
@@ -128,7 +126,7 @@ public class UserServlet extends HttpServlet {
 				ResultSet rs = preparedStatement.executeQuery();
 			// Step 4: Process the ResultSet object
 			while (rs.next()) {
-				name = rs.getString("userName");
+				name = rs.getString("name");
 				String password = rs.getString("password");
 				String email = rs.getString("email");
 				String language = rs.getString("language");
