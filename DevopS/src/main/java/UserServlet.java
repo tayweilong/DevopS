@@ -58,22 +58,22 @@ public class UserServlet extends HttpServlet {
 	private void listUsers(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException
 			{
-			List <User> users = new ArrayList <>();
+				List <User> users = new ArrayList <>();
 			try (Connection connection = getConnection();
-			// Step 5.1: Create a statement using connection object
-			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS);) {
-			// Step 5.2: Execute the query or update query
-			ResultSet rs = preparedStatement.executeQuery();
-			// Step 5.3: Process the ResultSet object.
-			while (rs.next()) {
-			String name = rs.getString("name");
-			String password = rs.getString("password");
-			String email = rs.getString("email");
-			String language = rs.getString("language");
-			users.add(new User(name, password, email, language));
-			}
+				// Step 5.1: Create a statement using connection object
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS);) {
+				// Step 5.2: Execute the query or update query
+				ResultSet rs = preparedStatement.executeQuery();
+				// Step 5.3: Process the ResultSet object.
+				while (rs.next()) {
+				String name = rs.getString("name");
+				String password = rs.getString("password");
+				String email = rs.getString("email");
+				String language = rs.getString("language");
+				users.add(new User(name, password, email, language));
+				}
 			} catch (SQLException e) {
-			System.out.println(e.getMessage());
+				System.out.println(e.getMessage());
 			}
 			// Step 5.4: Set the users list into the listUsers attribute to be pass to the userManagement.jsp
 			request.setAttribute("listUsers", users);
@@ -114,10 +114,33 @@ public class UserServlet extends HttpServlet {
 		
 	}
 
-	private void showEditForm(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
-	}
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+			//get parameter passed in the URL
+			String name = request.getParameter("name");
+			User existingUser = new User("", "", "", "");
+			// Step 1: Establishing a Connection
+			try (Connection connection = getConnection();
+			// Step 2:Create a statement using connection object
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
+				preparedStatement.setString(1, name);
+				// Step 3: Execute the query or update query
+				ResultSet rs = preparedStatement.executeQuery();
+			// Step 4: Process the ResultSet object
+			while (rs.next()) {
+				name = rs.getString("userName");
+				String password = rs.getString("password");
+				String email = rs.getString("email");
+				String language = rs.getString("language");
+				existingUser = new User(name, password, email, language);
+			}
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());	
+			}
+			//Step 5: Set existingUser to request and serve up the userEdit form
+				request.setAttribute("user", existingUser);
+				request.getRequestDispatcher("/userEdit.jsp").forward(request, response);
+			}
 
 	private void deleteUser(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
