@@ -1,7 +1,7 @@
 version: "3"
 services:
   management-app:
-    image: user-manage
+    image: jyorin/user-manage
     ports:
       - "8080:8080"
     networks:
@@ -10,7 +10,7 @@ services:
       - usersdb
  
   usersdb:
-    image: users
+    image: jyorin/users
     networks:
       - user-management-network
     environment:
