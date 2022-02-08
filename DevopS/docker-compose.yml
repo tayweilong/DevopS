@@ -1,0 +1,22 @@
+version: "3"
+services:
+  management-app:
+    image: user-manage
+    ports:
+      - "8080:8080"
+    networks:
+      - user-management-network
+    depends_on:
+      - usersdb
+ 
+  usersdb:
+    image: users
+    networks:
+      - user-management-network
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=userdetails  
+
+
+networks:
+  user-management-network: 
