@@ -13,7 +13,7 @@ pipeline {
         stage("build") {
             steps {
                 bat 'mvn -f Devops/pom.xml clean install'
-            
+        
             }
         }
         stage("test") {
@@ -21,5 +21,25 @@ pipeline {
                 bat 'mvn -f Devops/pom.xml test'    
             }
         }
+        stage("build docker image") {
+            steps {
+                dir("${env.WORKSPACE}/DevopS") {
+                bat 'dir'
+                bat 'docker build -t jyorin/user-manage-jenkins -f Dockerfile .'
+                }
+
+            }
+        }
+        stage("push to docker hub") {
+            steps {
+             
+                withCredentials([string(credentialsId: 'dockerpwd', variable: 'passdocker')]) {
+                    bat "docker login -u jyorin -p ${passdocker}"
+                }
+                bat "docker push jyorin/user-manage-jenkins"
+            }
+        }
+        
+        
     }
 }
