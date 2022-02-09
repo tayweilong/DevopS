@@ -50,7 +50,7 @@ public class RegisterServlet extends HttpServlet {
 		 //attempt connection to database using JDBC
 		 Class.forName("com.mysql.jdbc.Driver");
 		 Connection con = DriverManager.getConnection(
-		 "jdbc:mysql://devops-usersdb-1:3306/userdetails", "root", "password");
+		 "jdbc:mysql://devops-usersdb-1:3306/userdetails?allowPublicKeyRetrieval=true&useSSL=false", "root", "password");
 		 //SQL query
 		 PreparedStatement ps = con.prepareStatement("insert into USERDETAILS values(?,?,?,?)");
 		 //parse in the data retrieved from the web form request into the ps
