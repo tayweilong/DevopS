@@ -22,7 +22,7 @@ import javax.servlet.RequestDispatcher;
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	//Step 1: Prepare list of variables used for database connections
-	private String jdbcURL = "jdbc:mysql://127.0.0.1:3306/userdetails";
+	private String jdbcURL = "jdbc:mysql://devops-usersdb-1:3306/userdetails";
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "password";
 	//Step 2: Prepare list of SQL prepared statements to perform CRUD to our database
