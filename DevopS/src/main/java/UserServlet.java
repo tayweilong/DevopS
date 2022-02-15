@@ -91,7 +91,7 @@ public class UserServlet extends HttpServlet {
 	 int i = statement.executeUpdate();
 	 }
 	 //Step 3: redirect back to UserServlet dashboard (note: remember to change the url toyour project name)
-	 response.sendRedirect("/DevopS/UserServlet/dashboard");
+	 response.sendRedirect("/user-management/UserServlet/dashboard");
 	}
 
 	/**
@@ -139,7 +139,7 @@ public class UserServlet extends HttpServlet {
 	int i = statement.executeUpdate();
 	}
 	//Step 3: redirect back to UserServlet (note: remember to change the url to your project name)
-	response.sendRedirect("/DevopS/UserServlet/dashboard");
+	response.sendRedirect("/user-management/UserServlet/dashboard");
 	}
 
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
