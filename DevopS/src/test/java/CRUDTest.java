@@ -1,5 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,6 +30,7 @@ class CRUDTest {
 	void test_GetUserList() {
 		webDriver.navigate().to(BASE_URL + "UserServlet/dashboard");
 		String html = webDriver.findElement(By.xpath("//table[@class='table']/tbody/tr")).getAttribute("innerHTML");
+		System.out.println(html);
 		assert(html.contains("Joey"));
 	}
 	
@@ -41,7 +44,9 @@ class CRUDTest {
 		webDriver.findElement(By.id("email")).sendKeys("testuser@gmail.com");
 		webDriver.findElement(By.id("psw")).sendKeys("123456");
 		webDriver.findElement(By.className("signupbtn")).click();
+		webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		String html = webDriver.findElement(By.xpath("//a[contains(.,'Back to Dashboard')]")).getAttribute("innerHTML");
+		System.out.println(html);
 		assert(html.contains("Back to Dashboard"));	
 	}
 	
@@ -52,7 +57,9 @@ class CRUDTest {
 		webDriver.findElement(By.name("name")).clear();
 		webDriver.findElement(By.name("name")).sendKeys("Marie");
 		webDriver.findElement(By.className("btn-success")).click();
+		webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		String html = webDriver.findElement(By.xpath("//tbody//tr[last()]//td")).getAttribute("innerHTML");
+		System.out.println(html);
 		assert(html.contains("Marie"));
 	}
 	
@@ -60,7 +67,9 @@ class CRUDTest {
 	void test_deleteUser() {
 		webDriver.navigate().to(BASE_URL + "UserServlet/dashboard");
 		webDriver.findElement(By.xpath("//tbody//tr[last()]//td[last()]//a[last()]")).click();
+		webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		String html = webDriver.findElement(By.xpath("//tbody//tr[last()]//td")).getAttribute("innerHTML");
+		System.out.println(html);
 		assert(!html.contains("Marie"));
 	}
 
