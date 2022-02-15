@@ -30,6 +30,7 @@ class CRUDTest {
 	void test_GetUserList() {
 		webDriver.navigate().to(BASE_URL + "UserServlet/dashboard");
 		String html = webDriver.findElement(By.xpath("//table[@class='table']/tbody/tr")).getAttribute("innerHTML");
+		System.out.println("--- TEST GET USER LIST ---");
 		System.out.println(html);
 		assert(html.contains("Joey"));
 	}
@@ -46,6 +47,7 @@ class CRUDTest {
 		webDriver.findElement(By.className("signupbtn")).click();
 		webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		String html = webDriver.findElement(By.xpath("//a[contains(.,'Back to Dashboard')]")).getAttribute("innerHTML");
+		System.out.println("--- TEST ADD NEW USER ---");
 		System.out.println(html);
 		assert(html.contains("Back to Dashboard"));	
 	}
@@ -54,6 +56,9 @@ class CRUDTest {
 	void test_editUser() {
 		webDriver.navigate().to(BASE_URL + "UserServlet/dashboard");
 		webDriver.findElement(By.xpath("//tbody//tr[last()]//td[last()]//a")).click();
+		System.out.println("--- TEST EDIT USER ---");
+		System.out.println(webDriver.getCurrentUrl());
+		System.out.println(webDriver.getPageSource());
 		webDriver.findElement(By.name("name")).clear();
 		webDriver.findElement(By.name("name")).sendKeys("Marie");
 		webDriver.findElement(By.className("btn-success")).click();
@@ -67,6 +72,9 @@ class CRUDTest {
 	void test_deleteUser() {
 		webDriver.navigate().to(BASE_URL + "UserServlet/dashboard");
 		webDriver.findElement(By.xpath("//tbody//tr[last()]//td[last()]//a[last()]")).click();
+		System.out.println("--- TEST DELETE USER ---");
+		System.out.println(webDriver.getCurrentUrl());
+		System.out.println(webDriver.getPageSource());
 		webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		String html = webDriver.findElement(By.xpath("//tbody//tr[last()]//td")).getAttribute("innerHTML");
 		System.out.println(html);
