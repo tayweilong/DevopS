@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 class CRUDTest {
 	private WebDriver webDriver;
-	private String BASE_URL = "http://localhost:8080/DevopS/";
+	private String BASE_URL = "http://localhost:8080/user-management/";
 
 
 	@BeforeEach
