@@ -1,3 +1,4 @@
+package com.devops;
 public class User {
 	
 	protected String name;
